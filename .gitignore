@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+venv/
+venv/
+.venv/
+.Python
+
+# Virtual env folders
+venv/
+ENV/
+env/
+
+# IDE/editor
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Python packages
+*.egg-info/
+dist/
+build/
+
+# SQLite DB
+med_reminder.db
+*.db
+
+# dotenv / secrets
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock

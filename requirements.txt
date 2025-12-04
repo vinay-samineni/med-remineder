@@ -1,0 +1,15 @@
+fastapi
+uvicorn[standard]
+jinja2
+python-dotenv
+
+# Database
+databases
+aiosqlite
+sqlalchemy
+
+# Scheduler
+apscheduler
+
+# HTTP (for webhook testing, optional)
+httpx

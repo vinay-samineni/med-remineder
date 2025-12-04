@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Medication Reminder</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+        input {
+            padding: 10px;
+            margin: 8px 0;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px;
+            width: 100%;
+            background: #2e89ff;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #1a6edc;
+        }
+
+        table {
+            width: 100%;
+            background: white;
+            padding: 10px;
+            border-collapse: collapse;
+            border-radius: 8px;
+        }
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background: #2e89ff;
+            color: white;
+        }
+        .delete-btn {
+            padding: 6px 10px;
+            background: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .delete-btn:hover {
+            background: #d63838;
+        }
+        label { font-size: 0.9rem; color: #333; }
+    </style>
+</head>
+
+<body>
+
+<h1>Medication Reminder – Add Patient</h1>
+
+<form method="POST" action="/add">
+    <input type="text" name="patient_id" placeholder="Patient ID" required>
+    <input type="text" name="name" placeholder="Patient Name" required>
+    <input type="text" name="phone" placeholder="Phone Number (+91xxxx)" required>
+    <input type="email" name="email" placeholder="Patient Email (example@domain.com)" required>
+    <label>Start Date</label>
+    <input type="date" name="start_date" required>
+    <label>End Date</label>
+    <input type="date" name="end_date" required>
+    <label>Call Time</label>
+    <input type="time" name="time" required>
+
+    <button type="submit">Add Patient</button>
+</form>
+
+
+<h2>Scheduled Patients</h2>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Patient ID</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Time</th>
+        <th>Action</th>
+    </tr>
+
+    {% for p in patients %}
+    <tr>
+        <td>{{ p.id }}</td>
+        <td>{{ p.patient_id }}</td>
+        <td>{{ p.name }}</td>
+        <td>{{ p.phone }}</td>
+        <td>{{ p.email or '' }}</td>
+        <td>{{ p.start_date }}</td>
+        <td>{{ p.end_date }}</td>
+        <td>{{ p.time }}</td>
+
+        <td>
+            <form method="POST" action="/delete" onsubmit="return confirm('Delete this patient?');">
+                <input type="hidden" name="row_id" value="{{ p.id }}">
+                <button class="delete-btn">Delete</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
